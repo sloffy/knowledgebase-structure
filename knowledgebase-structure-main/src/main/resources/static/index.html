@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d49">
+  <title>Go-Spot — база знаний</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Go-Spot — база знаний, главная">
+        <span class="brand-symbol" aria-hidden="true">≈</span>
+        <span>Go-Spot<small>База знаний</small></span>
+      </a>
+
+      <div class="workspace-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+      <nav aria-label="Основная навигация">
+        <button class="nav-button active" data-view="search" aria-current="page"><span data-icon="search"></span>Поиск знаний</button>
+        <button class="nav-button" data-view="knowledge"><span data-icon="book"></span>Утверждения<span class="nav-count" id="nav-statements">—</span></button>
+        <button class="nav-button" data-view="topics"><span data-icon="nodes"></span>Темы и связи</button>
+        <button class="nav-button" data-view="sources"><span data-icon="file"></span>Источники</button>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="status-dot"></span><strong>Локальная база</strong>
+        <p>Знания, условия и источники в одном месте.</p>
+      </div>
+      <footer class="sidebar-footer">Для развития экосистемы Go-Spot<br>Без подключения к сайту</footer>
+    </aside>
+
+    <main id="main" tabindex="-1">
+      <header class="page-header">
+        <div><div class="eyebrow">GO-SPOT / <span id="view-breadcrumb">ПОИСК</span></div><h1 id="view-title">Знания для уверенного старта</h1><p id="view-description">Найдите ответ, проверьте условия и посмотрите, на чём он основан.</p></div>
+        <button class="button primary" id="global-add"><span data-icon="plus"></span>Добавить знание</button>
+      </header>
+
+      <div class="stats-grid" aria-label="Сводка базы знаний">
+        <div class="stat-card"><span class="stat-icon" data-icon="book"></span><div><span class="stat-label">Утверждения</span><strong id="stat-statements">—</strong></div><span class="stat-caption">в базе знаний</span></div>
+        <div class="stat-card"><span class="stat-icon teal" data-icon="check"></span><div><span class="stat-label">Проверены</span><strong id="stat-verified">—</strong></div><span class="stat-caption">с подтверждением</span></div>
+        <button class="stat-card actionable" id="open-candidates"><span class="stat-icon amber" data-icon="clock"></span><div><span class="stat-label">На проверке</span><strong id="stat-candidates">—</strong></div><span class="stat-caption">перейти к очереди <span aria-hidden="true">↗</span></span></button>
+      </div>
+
+      <section id="view-search" class="view-section">
+        <form id="search-form" class="search-panel">
+          <div class="section-heading"><div><h2>Что хотите узнать?</h2><p>SUP, каякинг, виндсёрфинг и всё, что помогает выйти на воду.</p></div><span class="pill muted">Поиск по темам и связям</span></div>
+          <label class="sr-only" for="search-question">Ваш вопрос</label>
+          <div class="search-input-row"><span data-icon="search"></span><input id="search-question" name="question" placeholder="Например: какое снаряжение нужно новичку для SUP?" maxlength="2000"><button class="button primary" type="submit">Найти ответ<span data-icon="arrow"></span></button></div>
+          <div class="suggestion-chips" aria-label="Примеры запросов"><button type="button" data-query="Как начать заниматься сапбордингом новичку?">Первый выход на SUP</button><button type="button" data-query="Безопасность каякинга на спокойной воде">Безопасность на воде</button><button type="button" data-query="Снаряжение для виндсерфинга">Снаряжение для виндсёрфинга</button></div>
+          <details class="search-filters"><summary><span data-icon="sliders"></span>Условия и фильтры<span class="filter-summary" id="filter-summary">Уточните ваш контекст</span></summary><div class="filter-grid primary-filters">
+            <label>Тема<select id="search-topic"><option value="">Все темы</option></select></label>
+            <label>Категория<select id="search-category"><option value="">Все категории</option></select></label>
+          </div><div id="search-categorical-filters" class="filter-grid"></div><p class="filter-group-label">Параметры окружающей среды</p><div id="search-numeric-filters" class="filter-grid numeric-filters"></div><label class="check-label filter-demo"><input id="search-demo" type="checkbox">Включить демонстрационные знания</label></details>
+        </form>
+
+        <div class="results-heading"><div><h2>Результаты поиска <span id="search-total" class="inline-count" aria-live="polite"></span></h2><p id="search-context">Ответы с условиями применимости и подтверждающими источниками.</p></div><span id="search-loading" class="loading-label" role="status" hidden>Ищем…</span></div>
+        <div id="search-notice" class="notice" role="status" hidden></div>
+        <div id="search-results"><div class="empty-state first-search"><div class="empty-symbol" data-icon="compass"></div><h3>Начните с вопроса</h3><p>Введите свой запрос или выберите пример выше.<br>Мы найдём знания и покажем условия их применимости.</p><div class="empty-tags"><span>SUP</span><span>Каякинг</span><span>Виндсёрфинг</span></div></div></div>
+        <div id="search-pagination" class="pagination" hidden></div>
+      </section>
+
+      <section id="view-knowledge" class="view-section" hidden>
+        <div class="collection-panel"><div class="section-heading"><div><h2>Все утверждения</h2><p>Наполняйте базу и проверяйте знания перед использованием.</p></div><button class="button secondary" id="knowledge-add"><span data-icon="plus"></span>Добавить</button></div><div class="collection-filters"><label class="sr-only" for="knowledge-q">Поиск утверждений</label><div class="input-with-icon"><span data-icon="search"></span><input id="knowledge-q" placeholder="Поиск по тексту…"></div><label class="sr-only" for="knowledge-status">Статус</label><select id="knowledge-status"><option value="">Все статусы</option></select><label class="sr-only" for="knowledge-topic">Тема</label><select id="knowledge-topic"><option value="">Все темы</option></select></div><div id="knowledge-list" class="knowledge-list"></div><div id="knowledge-pagination" class="pagination" hidden></div></div>
+      </section>
+
+      <section id="view-topics" class="view-section" hidden>
+        <div class="section-heading"><div><h2>Темы базы знаний</h2><p>Синонимы помогают распознавать запросы, связи расширяют поиск.</p></div><button class="button primary" id="topic-add"><span data-icon="plus"></span>Добавить тему</button></div><div id="topics-list" class="catalog-grid"></div>
+        <div class="collection-panel relations-panel"><div class="section-heading"><div><h2>Связи между темами</h2><p>Свяжите вид спорта со снаряжением или условиями окружающей среды.</p></div></div><form id="relation-form" class="relation-form"><label>Из темы<select id="relation-from" required></select></label><label>Тип связи<select id="relation-type" required></select></label><label>В тему<select id="relation-to" required></select></label><button class="button secondary" type="submit"><span data-icon="plus"></span>Связать</button></form><div id="relations-list" class="relations-list"></div><div id="relation-error" class="form-error" role="alert" hidden></div></div>
+      </section>
+
+      <section id="view-sources" class="view-section" hidden>
+        <div class="section-heading"><div><h2>Библиотека источников</h2><p>Документы, публикации и материалы, на которые опираются знания.</p></div><button class="button primary" id="source-add"><span data-icon="plus"></span>Добавить источник</button></div><div id="sources-list" class="catalog-grid"></div>
+      </section>
+
+      <footer class="main-footer"><span>Go-Spot — база знаний</span><span>Проверяйте условия перед выходом на воду</span></footer>
+    </main>
+  </div>
+
+  <dialog id="editor-dialog" class="editor-dialog" aria-labelledby="editor-title"><div class="dialog-heading"><div><div class="eyebrow" id="editor-eyebrow">БАЗА ЗНАНИЙ</div><h2 id="editor-title">Добавить утверждение</h2></div><button type="button" class="icon-button" id="editor-close" aria-label="Закрыть"><span data-icon="close"></span></button></div><div id="editor-content"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

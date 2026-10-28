@@ -1,0 +1,20 @@
+# Учебные примеры, созданные для демонстрации структуры. Не внешние источники и не проверенные рекомендации.
+# id\ttopic\tcategory\ttext\tconditions\treferences
+sup-general	sup	GENERAL	В сапбординге перемещаются по воде на доске с помощью весла.		board,paddle
+sup-equipment	sup	EQUIPMENT	В сапбординге используют доску и однолопастное весло.		board,paddle
+sup-start	sup	GETTING_STARTED	Для начинающих на спокойной воде учебный сценарий начинается со знакомства с доской и веслом.	BEGINNER,CALM_WATER	board,paddle
+sup-advanced	sup	GETTING_STARTED	Для опытных занимающихся учебный сценарий включает разбор техники поворотов.	EXPERIENCED	paddle
+sup-safety	sup	SAFETY	Для начинающих учебный сценарий включает обсуждение правил безопасности с инструктором.	BEGINNER	
+sup-conditions	sup	CONDITIONS	При сильном ветре условия перемещения на сап-доске отличаются от условий без ветра.	STRONG_WIND	wind
+kayak-general	kayak	GENERAL	В каякинге перемещаются в каяке с помощью весла.		paddle
+kayak-equipment	kayak	EQUIPMENT	В каякинге используют двухлопастное весло.		paddle
+kayak-start	kayak	GETTING_STARTED	Для начинающих на спокойной воде учебный сценарий включает знакомство с посадкой в каяк.	BEGINNER,CALM_WATER	water
+kayak-safety	kayak	SAFETY	Для начинающих учебный сценарий включает разбор действий при перевороте с инструктором.	BEGINNER	
+kayak-conditions	kayak	CONDITIONS	На волнах условия управления каяком отличаются от условий на спокойной воде.	WAVES	water
+windsurf-general	windsurf	GENERAL	В виндсёрфинге используют доску с парусом.		board,sail
+windsurf-equipment	windsurf	EQUIPMENT	Снаряжение для виндсёрфинга включает доску, парус, мачту и гик.		board,sail
+windsurf-start	windsurf	GETTING_STARTED	Для начинающих при слабом ветре учебный сценарий включает знакомство с положением паруса.	BEGINNER,LIGHT_WIND	sail,wind
+windsurf-safety	windsurf	SAFETY	Для начинающих учебный сценарий включает обсуждение безопасной дистанции с инструктором.	BEGINNER	
+windsurf-conditions	windsurf	CONDITIONS	В виндсёрфинге учитывают направление и силу ветра.		wind
+windsurf-strong	windsurf	CONDITIONS	При сильном ветре нагрузка на парус отличается от нагрузки при слабом ветре.	STRONG_WIND	sail,wind
+paddle-general	paddle	GENERAL	Весло — предмет снаряжения, используемый для перемещения по воде.		water
